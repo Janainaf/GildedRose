@@ -6,13 +6,26 @@ describe("GildedRose shop manager", function () {
     listItems = [];
   });
 
-  it("Test if the quality of Sulfuras does not change", function () {
-    listItems.push(new Item("Sulfuras, Hand of Ragnaros", 20, 30));
+  it("Aged Brie augmente sa qualité (quality) plus le temps passe.", function () {
+    listItems.push(new Item("Aged Brie", 1, 30));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
 
-    var expected = [{ quality: 30 }];
+    var expected = [{ sellIn: 0, quality: 33 }];
+
+    expected.forEach(function (testCase, idx) {
+      expect(items[idx].quality).toBe(testCase.quality);
+    });
+  });
+
+  it("Test if the quality of Sulfuras does not change", function () {
+    listItems.push(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
+
+    const gildedRose = new Shop(listItems);
+    const items = gildedRose.updateQuality();
+
+    var expected = [{ quality: 80 }];
 
     expected.forEach(function (testCase, idx) {
       expect(items[idx].quality).toBe(testCase.quality);
@@ -70,4 +83,9 @@ describe("GildedRose shop manager", function () {
       expect(items[idx].sellIn).toBe(testCase.sellIn);
     });
   });
+
+  // La qualité (quality) d'un produit ne peut jamais être négative
+  //La qualité d'un produit n'est jamais de plus de 50.
+  // Une fois que la date de péremption est passée, la qualité se dégrade deux fois plus rapidement.
+  // "Backstage passes", comme le "Aged Brie", augmente sa qualité (quality) plus le temps passe (sellIn) ; La qualité augmente de 2 quand il reste 10 jours ou moins et de 3 quand il reste 5 jours ou moins, mais la qualité tombe à 0 après le concert.
 });
