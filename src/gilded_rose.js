@@ -22,8 +22,8 @@ class Shop {
           }
         }
       } else {
-        if (this.items[i].sellIn <= 5) {
-          this.items[i].quality += 3;
+        if (this.items[i].sellIn < 10 && this.items[i].sellIn > 5) {
+          this.items[i].quality += 2;
         } else {
           if (this.items[i].quality < 50) {
             this.items[i].quality = this.items[i].quality + 1;
