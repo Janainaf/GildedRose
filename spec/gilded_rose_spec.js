@@ -19,6 +19,22 @@ describe("GildedRose shop manager", function () {
     });
   });
 
+  it("Test if the quality increases by 3 when there are 5 days or less (Aged Brie and Backstage passes)", function () {
+    listItems.push(new Item("Aged Brie", 5, 30));
+    listItems.push(
+      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 30)
+    );
+
+    const gildedRose = new Shop(listItems);
+    const items = gildedRose.updateQuality();
+
+    var expected = [{ quality: 33 }, { quality: 33 }];
+
+    expected.forEach(function (testCase, idx) {
+      expect(items[idx].quality).toBe(testCase.quality);
+    });
+  });
+
   it("Baisser de 1 la qualité et sellIn d'item normaux", function () {
     listItems.push(new Item("+5 Dexterity Vest", 10, 20));
     listItems.push(new Item("Mana Cake", 3, 6));
