@@ -23,7 +23,7 @@ class Shop {
         }
       } else {
         if (this.items[i].sellIn < 10 && this.items[i].sellIn > 5) {
-          this.items[i].quality += 2;
+          this.items[i].quality += 2; // only if quality less than 48 because no quality can be plus 50
         } else {
           if (this.items[i].quality < 50) {
             this.items[i].quality = this.items[i].quality + 1;

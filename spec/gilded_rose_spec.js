@@ -19,21 +19,21 @@ describe("GildedRose shop manager", function () {
     });
   });
 
-  // it("Test if the quality increases by 3 when there are 5 days or less (Aged Brie and Backstage passes)", function () {
-  //   listItems.push(new Item("Aged Brie", 5, 30));
-  //   listItems.push(
-  //     new Item("Backstage passes to a TAFKAL80ETC concert", 5, 30)
-  //   );
+  it("Test if the quality increases by 3 when there are 5 days or less (Aged Brie and Backstage passes)", function () {
+    listItems.push(new Item("Aged Brie", 5, 30));
+    listItems.push(
+      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 30)
+    );
 
-  //   const gildedRose = new Shop(listItems);
-  //   const items = gildedRose.updateQuality();
+    const gildedRose = new Shop(listItems);
+    const items = gildedRose.updateQuality();
 
-  //   var expected = [{ quality: 33 }, { quality: 33 }];
+    var expected = [{ quality: 33 }, { quality: 33 }];
 
-  //   expected.forEach(function (testCase, idx) {
-  //     expect(items[idx].quality).toBe(testCase.quality);
-  //   });
-  // });
+    expected.forEach(function (testCase, idx) {
+      expect(items[idx].quality).toBe(testCase.quality);
+    });
+  });
 
   it("Quality should increase by 2 when between 10 and 5 days Aged Brie and Backstage passes)", function () {
     listItems.push(new Item("Aged Brie", 8, 30));
@@ -48,7 +48,7 @@ describe("GildedRose shop manager", function () {
     });
   });
 
-  it(" Concert quality should be 0 after show )", function () {
+  it("Concert quality should be 0 after show )", function () {
     listItems.push(
       new Item("Backstage passes to a TAFKAL80ETC concert", -1, 30)
     );
@@ -133,6 +133,18 @@ describe("GildedRose shop manager", function () {
     });
   });
 
-  // La qualité (quality) d'un produit ne peut jamais être négative
-  //La qualité d'un produit n'est jamais de plus de 50.
+  it("La qualité d'un produit n'est jamais de plus de 50.", function () {
+    listItems.push(new Item("Aged Brie", 5, 49));
+    listItems.push(
+      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49)
+    );
+
+    const gildedRose = new Shop(listItems);
+    const items = gildedRose.updateQuality();
+
+    var expected = [{ quality: 50 }, { quality: 50 }];
+    expected.forEach(function (testCase, idx) {
+      expect(items[idx].quality).toBe(testCase.quality);
+    });
+  });
 });
