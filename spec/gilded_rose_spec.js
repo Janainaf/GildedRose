@@ -6,6 +6,20 @@ describe("GildedRose shop manager", function () {
     listItems = [];
   });
 
+  it("the quality of conjured items should decrease twice as fast", function () {
+    listItems.push(new Item("Conjured +5 Dexterity Vest", 2, 48));
+    listItems.push(new Item("Conjured Mana Cake", 2, 50));
+
+    const gildedRose = new Shop(listItems);
+    const items = gildedRose.updateQuality();
+
+    var expected = [{ quality: 46 }, { quality: 48 }];
+
+    expected.forEach(function (testCase, idx) {
+      expect(items[idx].quality).toBe(testCase.quality);
+    });
+  });
+
   it("Test if the quality of Sulfuras does not change", function () {
     listItems.push(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
 

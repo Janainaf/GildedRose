@@ -20,6 +20,11 @@ class Shop {
         continue;
       }
 
+      if (this.isConjuredItem(i)) {
+        this.DecreaseQualityBy2(i);
+        continue;
+      }
+
       this.updateItemQuality(i);
     }
     return this.items;
@@ -40,10 +45,8 @@ class Shop {
       }
     }
 
-    if (!this.IsSulfuras(i)) {
-      this.items[i].sellIn -= 1;
-      this.preventQualityHigherThan50(i);
-    }
+    this.items[i].sellIn -= 1;
+    this.preventQualityHigherThan50(i);
   }
 
   preventQualityHigherThan50(i) {
@@ -52,6 +55,15 @@ class Shop {
     }
   }
 
+  isConjuredItem(i) {
+    return this.items[i].name.includes("Conjured");
+  }
+
+  DecreaseQualityBy2(i) {
+    if (this.items[i].quality > 0) {
+      this.items[i].quality -= 2;
+    }
+  }
   DecreaseQuality(i) {
     if (!this.IsConcertPass(i)) {
       this.DecreaseQualityBy1(i);
