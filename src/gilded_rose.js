@@ -9,15 +9,16 @@ class Item {
 const AGED_BRIE = "Aged Brie";
 const CONCERT_PASS = "Backstage passes to a TAFKAL80ETC concert";
 const SULFURAS = "Sulfuras, Hand of Ragnaros";
+
 class Shop {
   constructor(items = []) {
     this.items = items;
   }
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
-      //Se for sulfuras{
-      //continue;
-      //}
+      if (this.IsSulfuras(i)) {
+        continue;
+      }
 
       this.updateItemQuality(i);
     }
@@ -123,6 +124,7 @@ class Shop {
     return this.items[i].quality < 50;
   }
 }
+
 module.exports = {
   Item,
   Shop,
