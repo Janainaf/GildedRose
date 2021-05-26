@@ -100,9 +100,7 @@ class Shop {
 
   DecreaseQualityBy1(i) {
     if (this.items[i].quality > 0) {
-      if (!this.IsSulfuras(i)) {
-        this.items[i].quality -= 1;
-      }
+      this.items[i].quality -= 1;
     }
   }
 
